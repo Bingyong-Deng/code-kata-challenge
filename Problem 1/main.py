@@ -3,6 +3,7 @@ import json
 import string
 import random
 
+#Generate file
 def generate_fixed(spec_name, file_name):
     with open(spec_name) as file:
         spec = json.load(file)
@@ -19,7 +20,7 @@ def generate_fixed(spec_name, file_name):
                     file.write(random.choice(string.ascii_letters))
 
 
-
+#Parse the file
 def parse(spec_name, file_name):
     with open(spec_name) as file:
         spec = json.load(file)
@@ -40,13 +41,14 @@ def parse(spec_name, file_name):
 
     return data
 
+#to .csv
 def generate_delimited(file_name, data):
     with open(file_name, 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerows(data)
 
+#main()
 if __name__=="__main__":
     generate_fixed('spec.json', 'output/data.txt')
     data = parse('spec.json', 'output/data.txt')
-
     generate_delimited('output/data.csv', data)
