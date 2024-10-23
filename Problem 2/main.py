@@ -2,9 +2,12 @@ import csv
 from cryptography.fernet import Fernet
 from faker import Faker  
 
+#Fernet need a "secret" key
+#it cannot be manipulated or read without the key
 def generate_key():
     return Fernet.generate_key()
 
+#Generate file
 def generate_file(output_csv):
     fake = Faker()
     data = []
@@ -21,6 +24,7 @@ def generate_file(output_csv):
         writer.writerow(['first_name','last_name','address','date_of_birth'])
         writer.writerows(data)
 
+#Encrypt and write
 def encrypt_csv(input_csv, output_csv):
     key = generate_key()
     fernet = Fernet(key)
@@ -32,6 +36,7 @@ def encrypt_csv(input_csv, output_csv):
         reader = csv.reader(file)
         rows = list(reader)
 
+        #Encryption
         for i in range(len(rows)):
             if i != 0:
                 rows[i][0] = fernet.encrypt(rows[i][0].encode()).decode()
@@ -42,6 +47,7 @@ def encrypt_csv(input_csv, output_csv):
         writer = csv.writer(outfile)
         writer.writerows(rows)
 
+#main()
 if __name__ == "__main__":
     generate_file('data.csv')
     encrypt_csv('data.csv', 'data_enc.csv')
