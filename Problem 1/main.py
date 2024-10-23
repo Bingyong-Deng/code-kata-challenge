@@ -18,7 +18,7 @@ def generate_fixed(spec_name, file_name):
                 for j in range(int(spec['Offsets'][i])):
                     file.write(random.choice(string.ascii_letters))
 
-        
+
 
 def parse(spec_name, file_name):
     with open(spec_name) as file:
@@ -37,7 +37,7 @@ def parse(spec_name, file_name):
 
             data.append(parsed)
             content = file.readline()
-    
+
     return data
 
 def generate_delimited(file_name, data):
@@ -46,7 +46,7 @@ def generate_delimited(file_name, data):
         writer.writerows(data)
 
 if __name__=="__main__":
-    generate_fixed('spec.json', 'data.txt')
-    data = parse('spec.json', 'data.txt')
+    generate_fixed('spec.json', 'output/data.txt')
+    data = parse('spec.json', 'output/data.txt')
 
-    generate_delimited('data.csv', data)
+    generate_delimited('output/data.csv', data)
