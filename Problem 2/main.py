@@ -1,5 +1,7 @@
 import csv
+#pip install cryptography
 from cryptography.fernet import Fernet
+#pip install Faker
 from faker import Faker  
 
 #Fernet need a "secret" key
